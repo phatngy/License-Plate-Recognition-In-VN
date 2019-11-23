@@ -41,8 +41,6 @@ MIN_CONTOUR_AREA = 100
 
 MARGIN = 5
 
-# CNN_MODEL = "models/cnn.ckpt"
-
 
 def showContours(possiblePlate, listOfPossibleCharsInPlate):
     height, width, numChannels = possiblePlate.imgPlate.shape
@@ -51,7 +49,7 @@ def showContours(possiblePlate, listOfPossibleCharsInPlate):
     
     for possibleChar in listOfPossibleCharsInPlate:
         contours.append(possibleChar.contour)
-    # end for
+
 
     cv2.drawContours(imgContours, contours, -1, Main.SCALAR_WHITE)
 
@@ -70,10 +68,8 @@ def showListOfLists(possiblePlate, listOfCharsInPlate):
 
     for matchingChar in listOfCharsInPlate:
         contours.append(matchingChar.contour)
-    # end for
 
     cv2.drawContours(imgContours, contours, -1, (intRandomBlue, intRandomGreen, intRandomRed))
-    # end for
 
     cv2.imshow("7.combineListOfLists", imgContours)
     cv2.waitKey(0)
@@ -89,8 +85,7 @@ def detectCharsInPlates(imgOriginalScene, listOfPossiblePlates, filePath):
         return listOfPossiblePlates             # return
     # end if
 
-            # at this point we can be sure the list of possible plates has at least one plate
-
+    # at this point we can be sure the list of possible plates has at least one plate
     for index, possiblePlate in enumerate(listOfPossiblePlates):          # for each possible plate, this is a big for loop that takes up most of the function
         possiblePlate.imgGrayscale, possiblePlate.imgThresh = Preprocess.preprocess(possiblePlate.imgPlate)     # preprocess to get grayscale and threshold images
         
@@ -107,12 +102,12 @@ def detectCharsInPlates(imgOriginalScene, listOfPossiblePlates, filePath):
             
         # end if # show steps #####################################################################
 
-                # increase size of plate image for easier viewing and char detection
+        # increase size of plate image for easier viewing and char detection
         possiblePlate.imgThresh = cv2.resize(possiblePlate.imgThresh, (0, 0), fx = 1.6, fy = 1.6)
 
-                # find all possible chars in the plate,
-                # this function first finds all contours, then only includes contours that could be chars (without comparison to other chars yet)
-        
+
+        # find all possible chars in the plate,
+        # this function first finds all contours, then only includes contours that could be chars (without comparison to other chars yet)
         listOfPossibleCharsInPlate = findPossibleCharsInPlate(adaptivePlate)
         listOfPossibleCharsInPlate.sort(key = lambda Char: Char.intCenterX)
         
