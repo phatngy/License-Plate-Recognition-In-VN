@@ -73,7 +73,7 @@ def writeLicensePlateCharsOnImage(imgOriginalScene, licPlate):
 ###################################################################################################
 if __name__ == "__main__":
 
-    filePath = "1.jpg"
+    filePath = "5.jpg"
     imgOriginalScene = cv2.imread(filePath)               # open image
     
 
@@ -102,9 +102,9 @@ if __name__ == "__main__":
 
             writeLicensePlateCharsOnImage(imgOriginalScene, licPlate)                   # write license plate text on the image
 
-        cv2.imshow("imgOriginalScene", imgOriginalScene)                                # re-show scene image
+        cv2.imshow("result", imgOriginalScene)                                # re-show scene image
 
-        cv2.imwrite("outputs/imgOriginalScene.png", imgOriginalScene)                   # write image out to file
+        cv2.imwrite("outputs/result.png", imgOriginalScene)                   # write image out to file
 
         cv2.waitKey(0)
     # end if
